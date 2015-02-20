@@ -10,7 +10,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/db', function (request, response) {
-  db.getEvents(function(err, events) {
+  db.getEvents(request.query, function(err, events) {
     if (err) {
       // TODO - something more relevant
       console.error(err);
