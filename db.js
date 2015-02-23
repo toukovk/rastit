@@ -35,7 +35,7 @@ var dateSchema = {
     }
     fn(null, parsed);
   }
-}
+};
 
 exports.eventQuerySchema = {
   'firstDate': dateSchema,
