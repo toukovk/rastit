@@ -2,16 +2,15 @@ var pg = require('pg');
 var squel = require('squel');
 var moment = require('moment');
 
-// TODO - think through the logic between validation schema & value handler for dates
-squel.registerValueHandler(Date, function(date) {
-  return moment(date).format('YYYY-MM-DD')
-});
-
 function getEvents(apiQuery, callback) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     var sql = squel.select().from('event');
     if(apiQuery.firstDate) {
-      sql = sql.where('start_time > ?', apiQuery.firstDate);
+      sql = sql.where('start_time >= ?', apiQuery.firstDate.format('YYYY-MM-DD'));
+    }
+    if(apiQuery.lastDate) {
+      sql = sql.where('start_time < ?', apiQuery.lastDate.add(1, 'days').format('YYYY-MM-DD'));
+
     }
     client.query(sql.toString(), sql.toParam(), function(err, result) {
       done();
@@ -24,20 +23,23 @@ function getEvents(apiQuery, callback) {
   });
 }
 
-exports.eventQuerySchema = {
-  'firstDate': {
-    custom: function(obj, schema, fn) {
-      if(!obj) {
-        fn(null, null);
-        return;
-      }
-      var parsed = moment(obj, 'YYYY-MM-DD');
-      if(!parsed.isValid()) {
-        return fn(new Error('Invalid date parameter'));
-      }
-      fn(null, parsed.toDate());
+var dateSchema = {
+  custom: function(obj, schema, fn) {
+    if(!obj) {
+      fn(null, null);
+      return;
     }
+    var parsed = moment(obj, 'YYYY-MM-DD');
+    if(!parsed.isValid()) {
+      return fn(new Error('Invalid date parameter'));
+    }
+    fn(null, parsed);
   }
+}
+
+exports.eventQuerySchema = {
+  'firstDate': dateSchema,
+  'lastDate': dateSchema
 };
 
 exports.getEvents = getEvents;
