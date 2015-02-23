@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var db = require('./db');
+var validate = require('isvalid-express');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
@@ -9,7 +10,7 @@ app.get('/', function(request, response) {
   response.send('Hello World!!');
 });
 
-app.get('/db', function (request, response) {
+app.get('/db', validate.query(db.eventQuerySchema), function (request, response) {
   db.getEvents(request.query, function(err, events) {
     if (err) {
       // TODO - something more relevant

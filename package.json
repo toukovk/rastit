@@ -9,7 +9,9 @@
   "dependencies": {
     "pg": "4.x",
     "express": "~4.9.x",
-    "squel": "3.x"
+    "squel": "3.x",
+    "isvalid-express": "0.x",
+    "moment": "2.9.x"
   },
   "engines": {
     "node": "0.10.x"
