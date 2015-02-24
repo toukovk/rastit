@@ -11,13 +11,17 @@
     "express": "~4.9.x",
     "squel": "3.x",
     "isvalid-express": "0.x",
-    "moment": "2.9.x"
+    "moment": "2.9.x",
+    "browserify": "9.0.x",
+    "baconjs": "0.7.x"
   },
   "devDependencies": {
     "jshint": "2.6.x"
   },
   "scripts": {
-    "jshint": "jshint *.js"
+    "jshint": "jshint *.js client/*.js",
+    "build-js": "browserify client/index.js > public/bundle.js",
+    "watch-js": "watchify client/index.js -do public/bundle.js"
   },
   "engines": {
     "node": "0.10.x"
