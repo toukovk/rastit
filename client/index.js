@@ -1,9 +1,14 @@
 var Bacon = require("baconjs");
+var Pikaday = require('pikaday');
+var domready = require('domready');
 
 module.exports = {
   init: function () {
-    console.log('Foobar', Bacon);
+    var field = document.getElementById('datepicker');
+    var picker = new Pikaday({ field: field });
   }
 };
 
-module.exports.init();
+domready(function() {
+  module.exports.init();
+});
