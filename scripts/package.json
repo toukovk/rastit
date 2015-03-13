@@ -1,0 +1,16 @@
+{
+  "name": "node-js-getting-started",
+  "version": "0.1.2",
+  "description": "A sample Node.js app using Express 4",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "2.1.x",
+    "request": "2.x",
+    "lodash": "3.x",
+    "jsdom": "3.x"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "license": "MIT"
+}
