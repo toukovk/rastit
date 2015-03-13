@@ -6,7 +6,7 @@ var validate = require('isvalid-express');
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
-app.get('/db', validate.query(db.eventQuerySchema), function (request, response) {
+app.get('/api/events', validate.query(db.eventQuerySchema), function (request, response) {
   db.getEvents(request.query, function(err, events) {
     if (err) {
       // TODO - something more relevant

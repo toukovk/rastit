@@ -38,7 +38,7 @@ module.exports = {
       lastDate: lastDate
     });
     var events = terms.flatMapLatest(function(terms) {
-      var query = '/db?firstDate=' + terms.firstDate.format(apiDateFormat) + '&lastDate=' + terms.lastDate.format(apiDateFormat);
+      var query = '/api/events?firstDate=' + terms.firstDate.format(apiDateFormat) + '&lastDate=' + terms.lastDate.format(apiDateFormat);
       return Bacon.fromPromise($.ajax(query));
     }).mapError("Search fail");
 
