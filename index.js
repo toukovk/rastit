@@ -2,7 +2,9 @@ var express = require('express');
 var app = express();
 var db = require('./db');
 var validate = require('isvalid-express');
+var bodyParser = require('body-parser');
 
+app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
@@ -14,6 +16,19 @@ app.get('/api/events', validate.query(db.eventQuerySchema), function (request, r
       response.send("Error " + err);
     } else {
       response.send(events);
+    }
+  });
+});
+
+app.post('/api/events', validate.body(db.insertEventSchema), function (request, response) {
+  // TODO - authentication
+  db.insertEvent(request.body, function(err) {
+    if(err) {
+      // TODO - something more relevant
+      console.error(err);
+      response.send("Error " + err);
+    } else {
+      response.send('OK');
     }
   });
 });
