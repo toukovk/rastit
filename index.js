@@ -3,6 +3,7 @@ var app = express();
 var db = require('./db');
 var validate = require('isvalid-express');
 var bodyParser = require('body-parser');
+var auth = require('basic-auth');
 
 app.use(bodyParser.json());
 app.set('port', (process.env.PORT || 5000));
@@ -21,7 +22,15 @@ app.get('/api/events', validate.query(db.eventQuerySchema), function (request, r
 });
 
 app.post('/api/events', validate.body(db.insertEventSchema), function (request, response) {
-  // TODO - authentication
+  var credentials = auth(request);
+  if (!credentials || credentials.name !== process.env.ADMIN_USERNAME || credentials.pass !== process.env.ADMIN_PASSWORD) {
+    console.error('POST /api/events called with missing/invalid credentials');
+    response.writeHead(401, {
+      'WWW-Authenticate': 'Basic realm="Admin API"'
+    });
+    response.end();
+    return;
+  }
   db.insertEvent(request.body, function(err) {
     if(err) {
       // TODO - something more relevant
