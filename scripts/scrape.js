@@ -60,7 +60,6 @@ var parseIltarastit2015 = function(body) {
     // "Paikka"
     var location = getColumnText($this, 6);
     return {
-      date: formatDate(date),
       start_time: formatTime(start),
       end_time: formatTime(end),
       // TODO closing: formatTime(closing),
