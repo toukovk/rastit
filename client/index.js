@@ -43,7 +43,13 @@ module.exports = {
     }).mapError("Search fail");
 
     events.onValue(function(events) {
-      var compiled = _.template('<li><%= info %> (<%= organizer %>)</li>');
+      events = _.map(events, function(event) {
+        var result = _.clone(event);
+        return _.extend(result, {
+          date: moment(event.start_time).format(uiDateFormat)
+        });
+      });
+      var compiled = _.template('<li><a href="<%= url %>"><%= info %> <%= date %></a> (<%= organizer %>)</li>');
       var foo = _.map(events, compiled).join('');
       $('ul#events').html(foo);
     });
