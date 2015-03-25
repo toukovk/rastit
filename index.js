@@ -22,6 +22,7 @@ app.get('/api/events', validate.query(db.eventQuerySchema), function (request, r
 });
 
 app.post('/api/events', validate.body(db.insertEventSchema), function (request, response) {
+  console.log('Request to /api/events', request.body);
   var credentials = auth(request);
   if (!credentials || credentials.name !== process.env.ADMIN_USERNAME || credentials.pass !== process.env.ADMIN_PASSWORD) {
     console.error('POST /api/events called with missing/invalid credentials');
