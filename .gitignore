@@ -1,3 +1,4 @@
 node_modules
 jquery.js
 npm-debug.log
+public/bundle.js
