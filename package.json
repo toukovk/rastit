@@ -27,15 +27,16 @@
     "pikaday": "1.3.x",
     "moment": "2.x",
     "lodash": "3.x",
-    "basic-auth": "1.x"
-  },
-  "devDependencies": {
-    "jshint": "2.6.x",
+    "basic-auth": "1.x",
     "browserify": "~9",
     "browserify-shim": "~3.8"
   },
+  "devDependencies": {
+    "jshint": "2.6.x"
+  },
   "scripts": {
     "preinstall": "curl http://code.jquery.com/jquery-2.1.3.min.js>jquery.js",
+    "postinstall": "npm run build-js",
     "jshint": "jshint *.js client/*.js",
     "build-js": "browserify --debug client/index.js > public/bundle.js",
     "watch-js": "watchify --debug client/index.js -do public/bundle.js"
