@@ -1,9 +1,11 @@
-var Bacon = require("baconjs");
 var $ = require("jquery");
-var bjq = require("bacon.jquery");
+var Bacon = require("baconjs");
 var Pikaday = require('pikaday');
 var moment = require('moment');
 var _ = require('lodash');
+
+// Patch asEventStream, see https://github.com/baconjs/bacon.js/issues/379
+$.fn.asEventStream = Bacon.$.asEventStream;
 
 module.exports = {
   init: function () {
