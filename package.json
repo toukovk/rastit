@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.2",
-  "description": "A sample Node.js app using Express 4",
+  "name": "rastit",
+  "version": "0.1.1",
+  "description": "Application for showing upcoming sports events (built for orienteering events)",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
