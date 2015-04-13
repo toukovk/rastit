@@ -1,0 +1,30 @@
+{
+  "name": "rastit-server",
+  "version": "0.1.1",
+  "description": "Rastit server",
+  "main": "index.js",
+  "dependencies": {
+    "pg": "4.x",
+    "express": "~4.9.x",
+    "body-parser": "1.x",
+    "squel": "3.x",
+    "isvalid-express": "0.x",
+    "moment": "2.9.x",
+    "watchify": "2.4.x",
+    "pikaday": "1.3.x",
+    "moment": "2.x",
+    "lodash": "3.x",
+    "basic-auth": "1.x"
+  },
+  "devDependencies": {
+    "jshint": "2.6.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "jshint": "jshint *.js"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "license": "MIT"
+}
