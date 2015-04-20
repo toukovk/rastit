@@ -16,6 +16,7 @@ function getEvents(apiQuery, callback) {
     if(apiQuery.lastDate) {
       sql = sql.where('start_time < ?', apiQuery.lastDate.add(1, 'days').format('YYYY-MM-DD'));
     }
+    sql = sql.order('start_time');
     client.query(sql.toString(), sql.toParam(), function(err, result) {
       done();
       if (err) {
