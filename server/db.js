@@ -41,7 +41,7 @@ function insertEvent(event, callback) {
         .set('end_time', event.end_time.format('YYYY-MM-DD HH:mm'))
         .set('organizer', event.organizer)
         .set('address', event.address)
-        .set('latitude', event.laditude || null)
+        .set('latitude', event.latitude || null)
         .set('longitude', event.longitude || null)
         .set('info', event.info)
         .set('url', event.url);
