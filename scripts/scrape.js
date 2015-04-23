@@ -57,6 +57,11 @@ var parseIltarastit2015 = function(body) {
     // "Maali sulkeutuu", e.g. 20.00
     var closingTime = getColumnText($this, 4);
     var closing = combineDateAndTime(date, moment(closingTime, 'HH.mm'));
+    var huom = getColumnText($this, 5);
+    if(huom === 'FL') {
+      console.error('Skipping firmaliiga event', dateOrig);
+      return null;
+    }
     // "Paikka"
     var location = getColumnText($this, 6);
     return {
