@@ -1,8 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.2",
-  "description": "A sample Node.js app using Express 4",
-  "main": "index.js",
+  "name": "rastit-scripts",
+  "version": "0.1.1",
+  "description": "Misc scripts for rastit data import etc",
   "dependencies": {
     "jquery": "2.1.x",
     "request": "2.x",
