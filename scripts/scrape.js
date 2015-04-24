@@ -1,16 +1,24 @@
 var request = require('request');
 var _ = require('lodash');
-var moment = require('moment');
+var moment = require('moment-timezone');
 var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 
+// time: hour & minute (without time zone information in Helsinki local time)
 var combineDateAndTime = function(date, time) {
-  return date.clone().hour(time.hour()).minute(time.minute());
+  var object = {
+    year: date.year(),
+    month: date.month(),
+    day: date.date(),
+    hour: time.hour(),
+    minute: time.minute()
+  };
+  return moment.tz(object, 'Europe/Helsinki');
 }
 var formatDate = function(date) {
   return date.format('YYYY-MM-DD');
 }
 var formatTime = function(date) {
-  return date.format('YYYY-MM-DD HH.mm');
+  return date.format();
 }
 // Parse string as "16.30" or "17"
 var parseTime = function(timeString) {
@@ -23,7 +31,7 @@ var parseTime = function(timeString) {
   }
 }
 // Parse strings as '16.30-18.30' or '17-18.30'
-var parseStartAndEnd = function(startToEndString) {
+var parseStartAndEnd = function(date, startToEndString) {
   var index = startToEndString.indexOf('-');
   var startTime = startToEndString.substring(0, index);
   var endTime = startToEndString.substring(index+1, startToEndString.length);
@@ -51,7 +59,7 @@ var parseIltarastit2015 = function(body) {
       return null;
     }
     // "Lähtöt", e.g. '16.30-18.30' or '17-18.30'
-    var startAndEnd = parseStartAndEnd(getColumnText($this, 3));
+    var startAndEnd = parseStartAndEnd(date, getColumnText($this, 3));
     var start = combineDateAndTime(date, startAndEnd.start);
     var end = combineDateAndTime(date, startAndEnd.end);
     // "Maali sulkeutuu", e.g. 20.00

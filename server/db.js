@@ -37,8 +37,8 @@ function insertEvent(event, callback) {
     }
     var sql = squel.insert()
         .into('event')
-        .set('start_time', event.start_time.format('YYYY-MM-DD HH:mm'))
-        .set('end_time', event.end_time.format('YYYY-MM-DD HH:mm'))
+        .set('start_time', event.start_time.format())
+        .set('end_time', event.end_time.format())
         .set('organizer', event.organizer)
         .set('address', event.address)
         .set('latitude', event.latitude || null)
@@ -77,7 +77,8 @@ var timeStampSchema = {
       fn(null, null);
       return;
     }
-    var parsed = moment(obj, 'YYYY-MM-DD HH:mm');
+    // Expect moment's defaults
+    var parsed = moment(obj);
     if(!parsed.isValid()) {
       return fn(new Error('Invalid date parameter'));
     }
