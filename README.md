@@ -2,6 +2,8 @@
 
 A work-in-progress application for showing upcoming sports events with date & location (built for orienteering "Iltarastit" events primarily).
 
+NOTE: Suunnistusliitto introduced similar service with up-to-date content: https://www.rastilippu.fi/kuntorastit/kartta
+
 ## Running Locally
 
 - TODO
